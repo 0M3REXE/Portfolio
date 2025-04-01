@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import NavBar from '@/components/NavBar';
 import Hero from '@/components/Hero';
+import Projects from '@/components/Projects';
 import Footer from '@/components/Footer';
 
 const portfolioData = {
@@ -10,7 +11,27 @@ const portfolioData = {
   location: "San Francisco, CA",
   specialization: "React, UI/UX, Design Systems",
   availability: "Freelance, Full-time",
-  initials: "JS"
+  initials: "JS",
+  projects: [
+    {
+      id: 1,
+      title: "Modern E-commerce Platform",
+      description: "A responsive shopping experience with dark mode",
+      tags: ["React", "Next.js", "Tailwind CSS"]
+    },
+    {
+      id: 2,
+      title: "Finance Dashboard",
+      description: "Data visualization tool for personal finance",
+      tags: ["TypeScript", "D3.js", "React"]
+    },
+    {
+      id: 3,
+      title: "AI Content Generator",
+      description: "Web app that creates custom marketing content",
+      tags: ["OpenAI API", "React", "Node.js"]
+    }
+  ]
 };
 
 const Home: FC = () => {
@@ -25,6 +46,7 @@ const Home: FC = () => {
         specialization={portfolioData.specialization}
         availability={portfolioData.availability}
       />
+      <Projects projects={portfolioData.projects} />
       <Footer />
     </div>
   );

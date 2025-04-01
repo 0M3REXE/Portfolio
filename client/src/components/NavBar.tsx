@@ -1,35 +1,91 @@
-import { FC } from 'react';
-import { MailIcon, Link2Icon } from 'lucide-react';
+import { FC, useState, useEffect } from 'react';
+import { MailIcon, Link2Icon, GithubIcon, LinkedinIcon } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface NavBarProps {
   initials: string;
 }
 
 const NavBar: FC<NavBarProps> = ({ initials }) => {
+  const [scrolled, setScrolled] = useState(false);
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      if (offset > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  
   return (
-    <nav className="py-6 px-4 md:px-8 flex justify-between items-center">
-      <div className="w-10 h-10 rounded-full bg-secondary border border-primary/30 flex items-center justify-center overflow-hidden">
-        <span className="text-primary text-xl font-semibold">{initials}</span>
-      </div>
-      
-      <div className="flex space-x-6">
-        <a 
-          href="mailto:contact@example.com" 
-          className="text-foreground hover:text-primary transition-colors duration-300"
-          aria-label="Contact via email"
+    <motion.nav 
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className={`py-5 px-4 md:px-10 fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled 
+          ? 'bg-background/80 backdrop-blur-md shadow-md' 
+          : 'bg-transparent'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto flex justify-between items-center">
+        <motion.div 
+          whileHover={{ scale: 1.05 }}
+          className="w-10 h-10 rounded-md bg-secondary/80 border border-primary/30 flex items-center justify-center overflow-hidden backdrop-blur-sm"
         >
-          <MailIcon className="h-5 w-5" />
-        </a>
-        <a 
-          href="#" 
-          className="text-foreground hover:text-primary transition-colors duration-300"
-          aria-label="View links"
-          onClick={(e) => e.preventDefault()}
-        >
-          <Link2Icon className="h-5 w-5" />
-        </a>
+          <span className="text-primary text-xl font-semibold">{initials}</span>
+        </motion.div>
+        
+        <div className="flex items-center space-x-6">
+          <motion.a 
+            whileHover={{ y: -2, color: 'hsl(var(--primary))' }}
+            href="mailto:contact@example.com" 
+            className="text-foreground hover:text-primary transition-colors duration-300"
+            aria-label="Contact via email"
+          >
+            <MailIcon className="h-5 w-5" />
+          </motion.a>
+          
+          <motion.a 
+            whileHover={{ y: -2, color: 'hsl(var(--primary))' }}
+            href="https://github.com" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-foreground hover:text-primary transition-colors duration-300"
+            aria-label="GitHub Profile"
+          >
+            <GithubIcon className="h-5 w-5" />
+          </motion.a>
+          
+          <motion.a 
+            whileHover={{ y: -2, color: 'hsl(var(--primary))' }}
+            href="https://linkedin.com" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-foreground hover:text-primary transition-colors duration-300"
+            aria-label="LinkedIn Profile"
+          >
+            <LinkedinIcon className="h-5 w-5" />
+          </motion.a>
+          
+          <motion.a 
+            whileHover={{ y: -2, color: 'hsl(var(--primary))' }}
+            href="#" 
+            className="text-foreground hover:text-primary transition-colors duration-300"
+            aria-label="View links"
+            onClick={(e) => e.preventDefault()}
+          >
+            <Link2Icon className="h-5 w-5" />
+          </motion.a>
+        </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 
