@@ -8,6 +8,7 @@ interface HeroProps {
   description: string;
   location: string;
   specialization: string;
+  skills: string;
   availability: string;
 }
 

@@ -24,6 +24,9 @@ const NavBar: FC<NavBarProps> = ({ name = "John Smith" }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
+  // Create a separate character array for the name
+  const nameArray = name.split("");
+  
   return (
     <motion.nav 
       initial={{ y: -20, opacity: 0 }}
@@ -40,14 +43,36 @@ const NavBar: FC<NavBarProps> = ({ name = "John Smith" }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
+          className="overflow-hidden"
         >
-          <span className="text-foreground text-xl font-light tracking-wide">{name}</span>
+          <div className="flex">
+            {nameArray.map((char, index) => (
+              <motion.span
+                key={index}
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ 
+                  duration: 0.5, 
+                  delay: 0.2 + (index * 0.05), 
+                  ease: "easeOut" 
+                }}
+                whileHover={{ 
+                  color: "hsl(var(--primary))", 
+                  scale: 1.1,
+                  transition: { duration: 0.2 } 
+                }}
+                className="text-foreground text-xl font-light tracking-wide"
+              >
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            ))}
+          </div>
         </motion.div>
         
         <div className="flex items-center space-x-6">
           <motion.a 
             whileHover={{ y: -2, color: 'hsl(var(--primary))' }}
-            href="mailto:contact@example.com" 
+            href="mailto:omerhyd8080@gmail.com" 
             className="text-foreground hover:text-primary transition-colors duration-300"
             aria-label="Contact via email"
           >
@@ -56,7 +81,7 @@ const NavBar: FC<NavBarProps> = ({ name = "John Smith" }) => {
           
           <motion.a 
             whileHover={{ y: -2, color: 'hsl(var(--primary))' }}
-            href="https://github.com" 
+            href="https://github.com/0M3REXE" 
             target="_blank"
             rel="noopener noreferrer"
             className="text-foreground hover:text-primary transition-colors duration-300"
@@ -67,7 +92,7 @@ const NavBar: FC<NavBarProps> = ({ name = "John Smith" }) => {
           
           <motion.a 
             whileHover={{ y: -2, color: 'hsl(var(--primary))' }}
-            href="https://linkedin.com" 
+            href="https://linkedin.com/0m3r" 
             target="_blank"
             rel="noopener noreferrer"
             className="text-foreground hover:text-primary transition-colors duration-300"
@@ -75,16 +100,7 @@ const NavBar: FC<NavBarProps> = ({ name = "John Smith" }) => {
           >
             <LinkedinIcon className="h-5 w-5" />
           </motion.a>
-          
-          <motion.a 
-            whileHover={{ y: -2, color: 'hsl(var(--primary))' }}
-            href="#" 
-            className="text-foreground hover:text-primary transition-colors duration-300"
-            aria-label="View links"
-            onClick={(e) => e.preventDefault()}
-          >
-            <Link2Icon className="h-5 w-5" />
-          </motion.a>
+        
         </div>
       </div>
     </motion.nav>
