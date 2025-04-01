@@ -20,7 +20,7 @@ export default defineConfig({
     },
   },
   // Use different base paths for dev and production
-  base: "/Portfolio/",
+  base: isProduction ? '/Portfolio/' : '/',
   root: path.resolve(__dirname, "client"),
   build: {
     outDir: path.resolve(__dirname, "dist"),
