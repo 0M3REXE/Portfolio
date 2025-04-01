@@ -58,8 +58,8 @@ const Hero: FC<HeroProps> = ({
                   duration: 0.5,
                   ease: [0.22, 1, 0.36, 1]
                 }}
-                className="inline-block text-5xl md:text-7xl font-serif mb-4 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70 animate-glow"
-                style={{ fontFamily: "Georgia, serif" }}
+                className="inline-block text-5xl md:text-7xl font-sans mb-4 tracking-tight text-foreground"
+                style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300 }}
               >
                 {char === ' ' ? '\u00A0' : char}
               </motion.span>

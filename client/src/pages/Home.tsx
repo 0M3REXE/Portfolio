@@ -36,7 +36,7 @@ const portfolioData = {
 const Home: FC = () => {
   return (
     <div className="min-h-screen flex flex-col">
-      <NavBar />
+      <NavBar name={portfolioData.name} />
       <Hero 
         name={portfolioData.name}
         title={portfolioData.title}

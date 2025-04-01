@@ -1,12 +1,13 @@
 import { FC, useState, useEffect } from 'react';
-import { MailIcon, Link2Icon, GithubIcon, LinkedinIcon, CodeIcon } from 'lucide-react';
+import { MailIcon, Link2Icon, GithubIcon, LinkedinIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface NavBarProps {
   initials?: string;
+  name?: string;
 }
 
-const NavBar: FC<NavBarProps> = () => {
+const NavBar: FC<NavBarProps> = ({ name = "John Smith" }) => {
   const [scrolled, setScrolled] = useState(false);
   
   useEffect(() => {
@@ -34,7 +35,15 @@ const NavBar: FC<NavBarProps> = () => {
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto flex justify-end items-center">
+      <div className="max-w-7xl mx-auto flex justify-between items-center">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <span className="text-foreground text-xl font-light tracking-wide">{name}</span>
+        </motion.div>
+        
         <div className="flex items-center space-x-6">
           <motion.a 
             whileHover={{ y: -2, color: 'hsl(var(--primary))' }}
