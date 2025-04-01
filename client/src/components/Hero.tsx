@@ -45,16 +45,26 @@ const Hero: FC<HeroProps> = ({
       <div className="relative z-10 max-w-4xl w-full space-y-16">
         {/* Name and tagline section */}
         <div className="text-center space-y-8">
-          <motion.h1 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            className="text-5xl md:text-7xl font-extralight mb-4 tracking-tight"
+          <motion.div
+            className="overflow-hidden"
           >
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70 animate-glow">
-              {name}
-            </span>
-          </motion.h1>
+            {name.split('').map((char, index) => (
+              <motion.span
+                key={index}
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{
+                  delay: index * 0.05,
+                  duration: 0.5,
+                  ease: [0.22, 1, 0.36, 1]
+                }}
+                className="inline-block text-5xl md:text-7xl font-serif mb-4 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70 animate-glow"
+                style={{ fontFamily: "Georgia, serif" }}
+              >
+                {char === ' ' ? '\u00A0' : char}
+              </motion.span>
+            ))}
+          </motion.div>
           
           <div className="relative h-16">
             <h2 className="typewriter inline-block max-w-full text-xl md:text-2xl font-light overflow-hidden whitespace-nowrap">

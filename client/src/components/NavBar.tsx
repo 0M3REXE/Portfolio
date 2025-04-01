@@ -1,12 +1,12 @@
 import { FC, useState, useEffect } from 'react';
-import { MailIcon, Link2Icon, GithubIcon, LinkedinIcon } from 'lucide-react';
+import { MailIcon, Link2Icon, GithubIcon, LinkedinIcon, CodeIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface NavBarProps {
-  initials: string;
+  initials?: string;
 }
 
-const NavBar: FC<NavBarProps> = ({ initials }) => {
+const NavBar: FC<NavBarProps> = () => {
   const [scrolled, setScrolled] = useState(false);
   
   useEffect(() => {
@@ -34,14 +34,7 @@ const NavBar: FC<NavBarProps> = ({ initials }) => {
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <motion.div 
-          whileHover={{ scale: 1.05 }}
-          className="w-10 h-10 rounded-md bg-secondary/80 border border-primary/30 flex items-center justify-center overflow-hidden backdrop-blur-sm"
-        >
-          <span className="text-primary text-xl font-semibold">{initials}</span>
-        </motion.div>
-        
+      <div className="max-w-7xl mx-auto flex justify-end items-center">
         <div className="flex items-center space-x-6">
           <motion.a 
             whileHover={{ y: -2, color: 'hsl(var(--primary))' }}

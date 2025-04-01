@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import NavBar from '@/components/NavBar';
 import Hero from '@/components/Hero';
-import Projects from '@/components/Projects';
+import Projects from '../components/Projects';
 import Footer from '@/components/Footer';
 
 const portfolioData = {
@@ -11,7 +11,6 @@ const portfolioData = {
   location: "San Francisco, CA",
   specialization: "React, UI/UX, Design Systems",
   availability: "Freelance, Full-time",
-  initials: "JS",
   projects: [
     {
       id: 1,
@@ -37,7 +36,7 @@ const portfolioData = {
 const Home: FC = () => {
   return (
     <div className="min-h-screen flex flex-col">
-      <NavBar initials={portfolioData.initials} />
+      <NavBar />
       <Hero 
         name={portfolioData.name}
         title={portfolioData.title}
