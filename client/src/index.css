@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+
+  :root {
+    --background: 0 0% 7%;
+    --foreground: 0 0% 90%;
+    
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 90%;
+    
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 90%;
+    
+    --primary: 110 100% 54%;
+    --primary-foreground: 0 0% 7%;
+    
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 90%;
+    
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 50%;
+    
+    --accent: 110 100% 54%;
+    --accent-foreground: 0 0% 7%;
+    
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 90%;
+    
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 110 100% 54%;
+    
+    --radius: 0.25rem;
+  }
+}
+
+/* Typewriter effect */
+.typewriter {
+  overflow: hidden;
+  border-right: .15em solid theme('colors.primary.DEFAULT');
+  white-space: nowrap;
+  margin: 0 auto;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: theme('colors.primary.DEFAULT') }
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 5px theme('colors.primary.DEFAULT'), 0 0 10px theme('colors.primary.DEFAULT'); }
+  to { text-shadow: 0 0 20px theme('colors.primary.DEFAULT'), 0 0 30px theme('colors.primary.DEFAULT'); }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(110, 85%, 45%);
+}
+
+/* Remove default outline and add custom focus states */
+*:focus {
+  outline: none;
+}
+
+a:focus, button:focus {
+  box-shadow: 0 0 0 2px hsl(var(--primary));
+  border-radius: 2px;
+}
+
+.animate-glow {
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.hidden-initially {
+  opacity: 0;
+}
+
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
