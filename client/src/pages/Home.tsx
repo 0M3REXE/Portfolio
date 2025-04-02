@@ -30,7 +30,7 @@ const ProjectsLoading = () => (
 
 const portfolioData = {
   name: "Omer Abdullah",
-  title: "Cybersecurity and Machine Learning Entusiast",
+  title: "Cybersecurity and Machine Learning Enthusiast",
   description: "I am a passionate software engineer with a focus on cybersecurity and machine learning. I love building secure and efficient applications.",
   location: "Hyderabad, India",
   specialization: "Tensorflow, Burp Suite, React, Next.js",

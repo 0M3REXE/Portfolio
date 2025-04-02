@@ -1,6 +1,6 @@
 import { FC, useState, useEffect } from 'react';
 import { MailIcon, Link2Icon, GithubIcon, LinkedinIcon } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useSpring, useTransform, useMotionValue } from 'framer-motion';
 
 interface NavBarProps {
   initials?: string;
@@ -9,20 +9,37 @@ interface NavBarProps {
 
 const NavBar: FC<NavBarProps> = ({ name = "John Smith" }) => {
   const [scrolled, setScrolled] = useState(false);
+  // Use motion value for smooth animation
+  const scrollYProgress = useMotionValue(0);
+  // Apply spring physics to the motion value
+  const smoothProgress = useSpring(scrollYProgress, { 
+    damping: 20, 
+    stiffness: 90, 
+    mass: 0.5 
+  });
+  
+  // Transform the 0-1 progress to a width percentage
+  const width = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
   
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
+      // For the background change
       if (offset > 50) {
         setScrolled(true);
       } else {
         setScrolled(false);
       }
+      
+      // For the progress bar
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercentage = scrollHeight > 0 ? Math.min(offset / scrollHeight, 1) : 0;
+      scrollYProgress.set(scrollPercentage);
     };
     
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [scrollYProgress]);
   
   // Create a separate character array for the name
   const nameArray = name.split("");
@@ -38,6 +55,14 @@ const NavBar: FC<NavBarProps> = ({ name = "John Smith" }) => {
           : 'bg-transparent'
       }`}
     >
+      {/* Progress bar */}
+      <div className="absolute bottom-0 left-0 h-[2px] bg-primary/20 w-full overflow-hidden">
+        <motion.div 
+          className="h-full bg-primary shadow-glow" 
+          style={{ width }}
+        />
+      </div>
+      
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <motion.div
           initial={{ opacity: 0 }}
